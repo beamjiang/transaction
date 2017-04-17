@@ -17,7 +17,7 @@ public class PayCheckBillService {
 		return this.dao.getByDate(billDate);
 	}
 	
-	public int add(CheckBill bill){
+	public int insert(CheckBill bill){
 		return this.dao.add(bill);
 	}
 

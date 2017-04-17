@@ -24,7 +24,7 @@ public class TestKittyService  extends BaseTest{
 	public void addKitty() throws Exception{
 		DataSourceTypeManager.set(DataSourceType.SLAVE);
 		System.out.println("enter addKitty!");
-		int ret = this.kittyService.add("hello,kitty");
+		int ret = this.kittyService.addx("hello,kitty");
 		System.out.println("add kitty,ret:"+ret);
 		throw new Exception();
 	}

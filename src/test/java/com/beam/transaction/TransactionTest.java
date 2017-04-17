@@ -1,7 +1,5 @@
 package com.beam.transaction;
 
-import java.util.ArrayList;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -9,10 +7,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.beam.transaction.dao.model.CheckBill;
-import com.beam.transaction.enums.DataSourceType;
 import com.beam.transaction.exception.DataBaseException;
 import com.beam.transaction.service.PayCheckBillService;
-import com.beam.transaction.util.DataSourceTypeManager;
 
 public class TransactionTest extends BaseTest {
 	@Resource(name="payCheckBillService")
@@ -21,8 +17,8 @@ public class TransactionTest extends BaseTest {
 	@Test
 	public void testPropagation(){
 		try {
-			addPayCheckBill();
-			addKitty();
+			insertPayCheckBill();
+			addxKitty();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error("add kitty failed!");
@@ -30,21 +26,21 @@ public class TransactionTest extends BaseTest {
 	}
 	
 	@Transactional(rollbackFor=Exception.class)
-	public int addKitty() throws Exception{
-		DataSourceTypeManager.set(DataSourceType.SLAVE);
+	public int addxKitty() throws Exception{
+		//DataSourceTypeManager.set(DataSourceType.SLAVE);
 		logger.debug("to add task_tmp");
-		int ret = this.kittyService.add("task_tmp1");
+		int ret = this.kittyService.addx("task_tmp1");
 		logger.debug("add task_tmp1,ret:"+ret);
 		
 		throw new DataBaseException();
 	}
 	
 	
-	public void addPayCheckBill(){
+	public void insertPayCheckBill(){
 		CheckBill bill = new CheckBill();
 		bill.setBillDate("20170414");
 		bill.setCheckStatus(1);
-		this.payCheckBillService.add(bill);
+		this.payCheckBillService.insert(bill);
 	}
 	
 

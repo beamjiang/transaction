@@ -21,7 +21,7 @@ import com.beam.transaction.enums.DataSourceType;
 @Order(0) 
 public class DataSourceInterceptor {
 	
-	@Pointcut("execution(public * com.beam.transaction.service.KittyService..*.add(..))")
+	@Pointcut("execution(public * com.beam.transaction.*.addKitty(..))")
 	public void dataSourceSlave(){
 		System.out.println("to dataSourceSlave");
 	};
@@ -31,4 +31,5 @@ public class DataSourceInterceptor {
 	DataSourceTypeManager.set(DataSourceType.SLAVE);
 	}
 
+	
 }

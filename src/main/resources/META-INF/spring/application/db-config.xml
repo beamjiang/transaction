@@ -137,6 +137,7 @@
         <property name="dataSource" ref="routingDataSource"/>
     </bean>
 
+
 <!-- 开启事务控制的注解支持 -->  
     <tx:annotation-driven transaction-manager="transactionManager-multi" proxy-target-class="false"/>
 </beans>

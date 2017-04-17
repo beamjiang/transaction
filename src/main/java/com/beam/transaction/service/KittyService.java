@@ -20,7 +20,7 @@ public class KittyService {
 	
 	@Resource
 	private KittyDao kDao;
-	public int add(String name){
+	public int addx(String name){
 		KittyDO obj = new KittyDO();
 		obj.setName(name);
 		return this.kDao.add(obj);

@@ -20,7 +20,7 @@ public class TestPayCheckBillService extends BaseTest {
 		bill.setBillDate("20170415");
 		bill.setCheckStatus(1);
 		System.out.println("to addPayCheckBill:"+bill);
-		int ret = this.payCheckBillService.add(bill);
+		int ret = this.payCheckBillService.insert(bill);
 		System.out.println("addPayCheckBill,ret:"+ret);
 		throw new Exception();
 	}

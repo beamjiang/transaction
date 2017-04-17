@@ -42,10 +42,10 @@ public class TestService {
 	public int addKitty() throws Exception{
 		DataSourceTypeManager.set(DataSourceType.SLAVE);
 		logger.debug("to add task_tmp");
-		int ret = this.kittyService.add("task_tmp1");
+		int ret = this.kittyService.addx("task_tmp1");
 		logger.debug("add task_tmp1,ret:"+ret);
 		logger.debug("to add task_tmp2,ret:"+ret);
-		int ret2 = this.kittyService.add("task_tmp2");
+		int ret2 = this.kittyService.addx("task_tmp2");
 		logger.debug("add task_tmp2,ret:"+ret2);
 		
 		throw new DataBaseException();
@@ -56,7 +56,7 @@ public class TestService {
 		CheckBill bill = new CheckBill();
 		bill.setBillDate("20170414");
 		bill.setCheckStatus(1);
-		this.payCheckBillService.add(bill);
+		this.payCheckBillService.insert(bill);
 	}
 	
 
