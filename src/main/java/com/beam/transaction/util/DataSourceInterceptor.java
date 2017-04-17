@@ -21,10 +21,13 @@ import com.beam.transaction.enums.DataSourceType;
 @Order(0) 
 public class DataSourceInterceptor {
 	
-	@Pointcut("execution(public * com.beam.transaction.service.PayCheckBillService..*.add(..))")
-	public void dataSourceSlave(){};
+	@Pointcut("execution(public * com.beam.transaction.service.KittyService..*.add(..))")
+	public void dataSourceSlave(){
+		System.out.println("to dataSourceSlave");
+	};
 	@Before("dataSourceSlave()")
 	public void before(JoinPoint jp) {
+		System.out.println("to before");
 	DataSourceTypeManager.set(DataSourceType.SLAVE);
 	}
 

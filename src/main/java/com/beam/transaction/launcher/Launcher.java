@@ -23,8 +23,8 @@ public class Launcher {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/application_dev.xml");
 		TestService testService = (TestService) context.getBean("testService");
 		try {
-			//testService.test();
-			testService.getPayCheckBill();
+			testService.test();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

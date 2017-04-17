@@ -58,8 +58,8 @@
         <property name="dataSource" ref="dataSource-pay"/>
     </bean>-->
 
- <!-- 开启事务控制的注解支持 -->  
-    <tx:annotation-driven transaction-manager="transactionManager-pay" proxy-target-class="false"/>
+ <!-- 开启事务控制的注解支持 
+    <tx:annotation-driven transaction-manager="transactionManager-pay" proxy-target-class="false"/>-->  
     
 <!-- ==================================datasource web=============================================== -->
 
