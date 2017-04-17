@@ -24,7 +24,7 @@ public class TransactionTest extends BaseTest {
 	public int addKitty() throws Exception{
 		logger.debug("to add task_tmp");
 		int ret = this.kittyService.add("task_tmp1");
-		
+		logger.debug("add task_tmp1,ret:"+ret);
 		logger.debug("to add task_tmp2,ret:"+ret);
 		int ret2 = this.kittyService.add("task_tmp2");
 		logger.debug("add task_tmp2,ret:"+ret2);

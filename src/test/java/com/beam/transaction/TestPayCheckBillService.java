@@ -14,7 +14,7 @@ public class TestPayCheckBillService extends BaseTest {
 	@Test
 	public void addPayCheckBill(){
 		CheckBill bill = new CheckBill();
-		bill.setBillDate("20170416");
+		bill.setBillDate("20170415");
 		bill.setCheckStatus(1);
 		this.payCheckBillService.add(bill);
 	}
