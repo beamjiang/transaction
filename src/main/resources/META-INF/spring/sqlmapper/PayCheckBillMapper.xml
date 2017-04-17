@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beam.transaction.dao.PayCheckBillDao">
+
+<resultMap id="CheckBill" type="com.beam.transaction.dao.model.CheckBill">
+		<id column="bill_date"  property="billDate"/>
+		<result column="check_status" property="checkStatus"/>
+</resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		pay_check_bill
+	</sql>
+	
+	
+	<!-- 新增 tested-->
+	<insert id="add" parameterType="com.beam.transaction.dao.model.CheckBill" >
+		insert into 
+	<include refid="tableName"></include>
+		values (#{billDate},#{checkStatus})
+	</insert>
+	
+    <select id="getByDate" parameterType="java.lang.String" resultMap="CheckBill">
+       select * from 
+          <include refid="tableName"/>
+       where bill_date=#{billDate}   
+	</select>
+
+</mapper>
