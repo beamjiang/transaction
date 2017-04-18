@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"  
+       xmlns:aop="http://www.springframework.org/schema/aop" 
+       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/aop  
+         http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        ">
+<bean id="dataSource-pay" class="com.atomikos.jdbc.AtomikosDataSourceBean"  
+        init-method="init" destroy-method="close">  
+        <property name="uniqueResourceName" value="mysql/pay" />  
+        <property name="xaDataSourceClassName"  
+            value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />  
+        <property name="xaProperties">  
+	        <props>  
+	            <prop key="url">${druid.pay.jdbc_url}</prop>  
+	            <prop key="user">${druid.pay.jdbc_user}</prop>  
+	            <prop key="password">${druid.pay.jdbc_password}</prop>  
+	        </props>  
+        </property>  
+         <property name="minPoolSize" value="10" />  
+	    <property name="maxPoolSize" value="100" />  
+	    <property name="borrowConnectionTimeout" value="30" />  
+	    <property name="testQuery" value="select 1" />  
+	    <property name="maintenanceInterval" value="60" /> 
+    </bean>  
+    
+    <bean id="myBatisSqlSessionFactory-pay" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" value="classpath:META-INF/spring/sqlmapper/*.xml"/>
+        <property name="dataSource" ref="dataSource-pay"/>
+        <property name="configLocation"
+                  value="classpath:META-INF/spring/common/mybatis-configuration.xml"/>
+
+    </bean>
+    
+    <!-- ==================================datasource web=============================================== -->
+    
+    <bean id="dataSource-web" class="com.atomikos.jdbc.AtomikosDataSourceBean"  
+        init-method="init" destroy-method="close">  
+        <property name="uniqueResourceName" value="mysql/web" />  
+        <property name="xaDataSourceClassName"  
+            value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />  
+        <property name="xaProperties">  
+	        <props>  
+	            <prop key="url">${druid.web.jdbc_url}</prop>  
+	            <prop key="user">${druid.web.jdbc_user}</prop>  
+	            <prop key="password">${druid.web.jdbc_password}</prop>  
+	        </props>  
+        </property>  
+         <property name="minPoolSize" value="10" />  
+	    <property name="maxPoolSize" value="100" />  
+	    <property name="borrowConnectionTimeout" value="30" />  
+	    <property name="testQuery" value="select 1" />  
+	    <property name="maintenanceInterval" value="60" /> 
+    </bean>  
+    <bean id="myBatisSqlSessionFactory-web" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations" value="classpath:META-INF/spring/sqlmapper/*.xml"/>
+        <property name="dataSource" ref="dataSource-web"/>
+        <property name="configLocation"
+                  value="classpath:META-INF/spring/common/mybatis-configuration.xml"/>
+
+    </bean>
+    
+    <!-- ==================================atomikosTransaction=============================================== -->
+    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"  
+        init-method="init" destroy-method="close">  
+        <property name="forceShutdown">  
+            <value>true</value>  
+        </property>  
+    </bean> 
+    
+     <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">  
+        <property name="transactionTimeout" value="300" />  
+    </bean> 
+    
+    <bean id="springTransactionManager"  
+        class="org.springframework.transaction.jta.JtaTransactionManager">  
+        <property name="transactionManager">  
+            <ref bean="atomikosTransactionManager" />  
+        </property>  
+        <property name="userTransaction">  
+            <ref bean="atomikosUserTransaction" />  
+        </property>  
+         <property name="allowCustomIsolationLevels">  
+            <value>true</value>   
+        </property>  
+    </bean>  
+    
+   <!-- <aop:aspectj-autoproxy />  
+  
+    <aop:config  proxy-target-class="true">  
+        <aop:advisor pointcut="execution(* *com.beam.transaction..*(..))"  
+            advice-ref="txAdvice" />  
+    </aop:config> 
+    
+     <tx:advice id="txAdvice" transaction-manager="springTransactionManager">  
+        <tx:attributes>  
+            <tx:method name="get*"  propagation="REQUIRED"  read-only="true" />  
+            
+            <tx:method name="*"  propagation="REQUIRED" rollback-for="Exception"  />  
+        </tx:attributes>  
+    </tx:advice> -->  
+    
+<!-- 开启事务控制的注解支持 -->  
+    <tx:annotation-driven transaction-manager="springTransactionManager" proxy-target-class="false"/>
+</beans>
+
+
+
+ 

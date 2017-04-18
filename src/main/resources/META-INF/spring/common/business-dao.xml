@@ -4,17 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="payChannelDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-multi"/>
+        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-pay"/>
         <property name="mapperInterface" value="com.beam.transaction.dao.PayChannelDao"/>
     </bean>
     
     <bean id="kittyDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-multi"/>
+        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-pay"/>
         <property name="mapperInterface" value="com.beam.transaction.dao.KittyDao"/>
     </bean>
     
 <bean id="payCheckBillDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-multi"/>
+        <property name="sqlSessionFactory" ref="myBatisSqlSessionFactory-web"/>
         <property name="mapperInterface" value="com.beam.transaction.dao.PayCheckBillDao"/>
     </bean>
 </beans>

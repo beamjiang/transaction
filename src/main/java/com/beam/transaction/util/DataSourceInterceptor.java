@@ -16,7 +16,7 @@ import com.beam.transaction.enums.DataSourceType;
  * @author Administrator
  *
  */
-@Aspect
+/*@Aspect
 @Component 
 @Order(0) 
 public class DataSourceInterceptor {
@@ -32,4 +32,4 @@ public class DataSourceInterceptor {
 	}
 
 	
-}
+}*/
